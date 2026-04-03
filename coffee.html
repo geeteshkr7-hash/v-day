@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey Ri ☕💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;700;800;900&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="coffee-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <!-- Floating particles canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Warm ambient glow blobs -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Steam rising from bottom -->
+    <div class="steam-container">
+        <div class="steam steam-1"></div>
+        <div class="steam steam-2"></div>
+        <div class="steam steam-3"></div>
+    </div>
+
+    <!-- Main content -->
+    <div class="page-wrapper">
+        <!-- Scene 1: Opening -->
+        <section class="scene scene-1 active" id="scene-1">
+            <div class="glass-card">
+                <p class="greeting fade-up">Hey</p>
+                <h1 class="name-reveal fade-up delay-1">Ri 🤍</h1>
+                <p class="sub-text fade-up delay-2">I know things feel heavy right now...</p>
+                <button class="next-btn fade-up delay-3" onclick="goToScene(2)">
+                    <span>come here</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Scene 2: Message -->
+        <section class="scene scene-2" id="scene-2">
+            <div class="glass-card wide-card">
+                <div class="cute-gif-wrap">
+                    <img src="https://media.tenor.com/fpIe6tOQ9x4AAAAj/peach-goma-love.gif" alt="cute hug" class="cute-gif">
+                </div>
+                <div class="typewriter-container">
+                    <p class="typewriter-text" id="typewriter"></p>
+                    <span class="cursor" id="cursor">|</span>
+                </div>
+                <button class="next-btn hidden" id="scene2-btn" onclick="goToScene(3)">
+                    <span>and soo...</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Scene 3: The Coffee Ask -->
+        <section class="scene scene-3" id="scene-3">
+            <div class="glass-card coffee-card">
+                <div class="coffee-emoji-float">☕</div>
+                <h2 class="coffee-title fade-up">Let's go grab a coffee?</h2>
+                <p class="coffee-sub fade-up delay-1">Just you and me. No worries. No stress.</p>
+                <p class="coffee-sub fade-up delay-2">Just warm coffee and warm company 💛</p>
+
+                <div class="cute-gif-wrap fade-up delay-2">
+                    <img src="https://media.tenor.com/S2gFsvVPsyoAAAAj/peach-cat-goma.gif" alt="cute coffee" class="cute-gif coffee-gif">
+                </div>
+
+                <div class="buttons-wrap fade-up delay-3">
+                    <button class="coffee-btn yes-coffee" id="yes-coffee" onclick="handleCoffeeYes()">
+                        ☕ Yes, let's go!
+                    </button>
+                    <button class="coffee-btn no-coffee" id="no-coffee" onclick="handleCoffeeNo()">
+                        Maybe later...
+                    </button>
+                </div>
+                <div id="no-toast" class="no-toast"></div>
+            </div>
+        </section>
+
+        <!-- Scene 4: Yay! -->
+        <section class="scene scene-4" id="scene-4">
+            <div class="glass-card yay-card">
+                <h1 class="yay-title">Yayy! ☕💕</h1>
+                <div class="cute-gif-wrap">
+                    <img src="https://media.tenor.com/eNHbizSfVb0AAAAj/lovemode-cute.gif" alt="celebrating" class="cute-gif yay-gif">
+                </div>
+                <p class="yay-message">It's a date then! 🤍</p>
+                <p class="yay-submessage">Can't wait to see your smile again, Ri</p>
+                <div class="sparkle-row">✨ ☕ 💕 ☕ ✨</div>
+            </div>
+        </section>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="music/beabadoobee - Glue Song (Lyrics).mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-toggle" onclick="toggleMusic()" title="Toggle music">🔊</button>
+
+    <script src="coffee-script.js"></script>
+</body>
+</html>

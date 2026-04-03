@@ -1,0 +1,585 @@
+/* ═══════════════════════════════════════════
+   COFFEE DATE INVITE — AESTHETIC WARM THEME
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;700;800;900&family=Dancing+Script:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-deep: #1a1114;
+    --bg-warm: #2a1a1e;
+    --accent-gold: #d4a574;
+    --accent-cream: #f5e6d3;
+    --accent-rose: #c9a0a0;
+    --accent-blush: #e8c4c4;
+    --accent-latte: #c8a882;
+    --glass-bg: rgba(42, 30, 34, 0.55);
+    --glass-border: rgba(212, 165, 116, 0.15);
+    --text-primary: #f5e6d3;
+    --text-secondary: rgba(245, 230, 211, 0.65);
+    --text-accent: #d4a574;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 20% 80%, rgba(200, 168, 130, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(201, 160, 160, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(42, 26, 30, 1) 0%, var(--bg-deep) 100%);
+}
+
+/* ── PARTICLES CANVAS ────────────────────── */
+#particles-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ── AMBIENT GLOW BLOBS ──────────────────── */
+.ambient-glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(212, 165, 116, 0.4), transparent);
+    top: -100px;
+    right: -100px;
+    animation: glowDrift 12s ease-in-out infinite alternate;
+}
+
+.glow-2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(201, 160, 160, 0.35), transparent);
+    bottom: -80px;
+    left: -80px;
+    animation: glowDrift 15s ease-in-out infinite alternate-reverse;
+}
+
+.glow-3 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(200, 168, 130, 0.2), transparent);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: glowPulse 8s ease-in-out infinite;
+}
+
+@keyframes glowDrift {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, -30px) scale(1.15); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.3; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* ── STEAM EFFECT ────────────────────────── */
+.steam-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40vh;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.steam {
+    position: absolute;
+    bottom: -20px;
+    width: 60px;
+    height: 120px;
+    background: linear-gradient(to top, rgba(212, 165, 116, 0.06), transparent);
+    border-radius: 50%;
+    filter: blur(20px);
+    animation: steamRise 6s ease-in-out infinite;
+}
+
+.steam-1 { left: 20%; animation-delay: 0s; }
+.steam-2 { left: 50%; animation-delay: 2s; width: 80px; height: 150px; }
+.steam-3 { left: 75%; animation-delay: 4s; }
+
+@keyframes steamRise {
+    0% { transform: translateY(0) scaleX(1); opacity: 0; }
+    30% { opacity: 0.6; }
+    100% { transform: translateY(-35vh) scaleX(2); opacity: 0; }
+}
+
+/* ── PAGE WRAPPER ────────────────────────── */
+.page-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ── SCENES ──────────────────────────────── */
+.scene {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+.scene.active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 10;
+}
+
+/* ── GLASS CARD ──────────────────────────── */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    padding: 48px 40px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    box-shadow:
+        0 8px 40px rgba(0, 0, 0, 0.3),
+        0 0 80px rgba(212, 165, 116, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.3), transparent);
+}
+
+.wide-card {
+    max-width: 520px;
+}
+
+.coffee-card {
+    max-width: 500px;
+    padding-top: 60px;
+}
+
+/* ── SCENE 1 — GREETING ──────────────────── */
+.greeting {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.name-reveal {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-cream), var(--accent-gold), var(--accent-rose));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.sub-text {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 36px;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+}
+
+/* ── NEXT BUTTON ─────────────────────────── */
+.next-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.15), rgba(212, 165, 116, 0.08));
+    border: 1px solid rgba(212, 165, 116, 0.25);
+    border-radius: 100px;
+    color: var(--accent-gold);
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.5px;
+}
+
+.next-btn:hover {
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.25), rgba(212, 165, 116, 0.15));
+    border-color: rgba(212, 165, 116, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212, 165, 116, 0.12);
+}
+
+.next-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.next-btn:hover svg {
+    transform: translateX(4px);
+}
+
+/* ── FADE-UP ANIMATION ───────────────────── */
+.fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+.delay-3 { animation-delay: 0.9s; }
+.delay-4 { animation-delay: 1.2s; }
+
+@keyframes fadeUpIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── CUTE GIF ────────────────────────────── */
+.cute-gif-wrap {
+    margin: 24px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.cute-gif {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 20px rgba(212, 165, 116, 0.15));
+    border-radius: 20px;
+}
+
+.coffee-gif {
+    width: 140px;
+    height: 140px;
+}
+
+/* ── TYPEWRITER ──────────────────────────── */
+.typewriter-container {
+    min-height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.typewriter-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--accent-cream);
+    line-height: 1.8;
+    max-width: 400px;
+    display: inline;
+}
+
+.cursor {
+    display: inline-block;
+    color: var(--accent-gold);
+    font-weight: 300;
+    animation: blink 0.8s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* ── SCENE 2 BUTTON ──────────────────────── */
+#scene2-btn {
+    margin-top: 28px;
+    transition: all 0.5s ease;
+}
+
+#scene2-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+}
+
+#scene2-btn.visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+}
+
+/* ── SCENE 3 — COFFEE ASK ────────────────── */
+.coffee-emoji-float {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    animation: coffeeFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 4px 12px rgba(212, 165, 116, 0.3));
+}
+
+@keyframes coffeeFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0) rotate(-5deg); }
+    50% { transform: translateX(-50%) translateY(-12px) rotate(5deg); }
+}
+
+.coffee-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-cream), var(--accent-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+}
+
+.coffee-sub {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+/* ── COFFEE BUTTONS ──────────────────────── */
+.buttons-wrap {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 28px;
+    flex-wrap: wrap;
+}
+
+.coffee-btn {
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    letter-spacing: 0.5px;
+}
+
+.yes-coffee {
+    background: linear-gradient(135deg, #d4a574, #c8a882);
+    color: var(--bg-deep);
+    box-shadow: 0 4px 20px rgba(212, 165, 116, 0.3);
+}
+
+.yes-coffee:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 8px 32px rgba(212, 165, 116, 0.45);
+}
+
+.no-coffee {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.no-coffee:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+/* ── NO TOAST ────────────────────────────── */
+.no-toast {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: var(--accent-rose);
+    font-weight: 700;
+    font-style: italic;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 1.5rem;
+}
+
+.no-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── SCENE 4 — YAY ───────────────────────── */
+.yay-card {
+    max-width: 480px;
+    padding: 52px 40px;
+}
+
+.yay-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-cream), var(--accent-gold), var(--accent-rose));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: yayBounce 1.5s ease-in-out infinite;
+    margin-bottom: 8px;
+}
+
+@keyframes yayBounce {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+.yay-gif {
+    width: 200px;
+    height: 200px;
+}
+
+.yay-message {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+    margin-top: 16px;
+    animation: fadeUpIn 0.8s ease 0.4s both;
+}
+
+.yay-submessage {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    font-style: italic;
+    animation: fadeUpIn 0.8s ease 0.7s both;
+}
+
+.sparkle-row {
+    margin-top: 24px;
+    font-size: 1.4rem;
+    letter-spacing: 8px;
+    opacity: 0.7;
+    animation: fadeUpIn 0.8s ease 1s both;
+}
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media (max-width: 540px) {
+    .glass-card {
+        padding: 36px 24px;
+        border-radius: 22px;
+    }
+
+    .name-reveal {
+        font-size: 2.8rem;
+    }
+
+    .coffee-title {
+        font-size: 1.6rem;
+    }
+
+    .yay-title {
+        font-size: 2.4rem;
+    }
+
+    .typewriter-text {
+        font-size: 1.1rem;
+    }
+
+    .cute-gif {
+        width: 130px;
+        height: 130px;
+    }
+
+    .buttons-wrap {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .coffee-btn {
+        width: 100%;
+        max-width: 260px;
+    }
+}
+
+/* ── SELECTION STYLE ─────────────────────── */
+::selection {
+    background: rgba(212, 165, 116, 0.3);
+    color: var(--accent-cream);
+}
+
+/* ── SCROLLBAR ───────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(212, 165, 116, 0.2);
+    border-radius: 100px;
+}
+
+/* ── MUSIC TOGGLE ────────────────────────── */
+#music-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 165, 116, 0.25);
+    background: rgba(42, 30, 34, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#music-toggle:hover {
+    background: rgba(212, 165, 116, 0.15);
+    border-color: rgba(212, 165, 116, 0.4);
+    transform: scale(1.1);
+}
